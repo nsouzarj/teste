@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<div>
+
+    
+
+    <h4 style="color:blue;"> ID: {{soli.id}}</h4>
+    <h4>DATA SOLICITAÇÃO: {{soli.datasolictacao | date :'shortDate'}}</h4>
+    <h4>DATA DO PRAZO: {{soli.dataprazo  | date :'shortDate'}}</h4>
+    <h4>STATUS:  {{soli.statussolicitacao.status}} </h4>
+    <div>
+      <h4>COMARCA: {{soli.processo.comarca.nome}} </h4>
+    </div>
+    <h4>SIGLA: {{soli.processo.comarca.uf.sigla}} </h4>
+    <h4>NUM PROCESSO: {{soli.processo.numeroprocesso}}</h4>
+    <h4>CARTÓRIO: {{soli.processo.cartorio}}</h4>
+
+    <h4>TIPO: {{soli.renumeracao.tiposolicitacao.tipo}}</h4>
+    <div>
+      <h4>ENVIO: {{soli.envio.descricao }}</h4>
+    </div>
+    <h4>BANCA: {{soli.processo.bancaprocesso.banca}}</h4>
+    <h4>RÉU: {{soli.processo.adverso}}</h4>
+    <h4>AUTOR: {{soli.processo.parte}}</h4>
+
+    <h4>COLABORADOR: {{soli.renumeracao.correspondente.nome}}</h4>
+    <h4>ASSUNTO: {{soli.processo.assunto}}</h4>
+    <h4>INSTRUÇÕES</h4>
+    <textarea [rows]="7"  style="width: 100%; font-family: Arial, Helvetica, sans-serif; font-size: 18px; background-color: #C8C2C2; text-align: justify;"  [(ngModel)]="soli.instrucoes"  [cols]="80" pInputTextarea autoResize="autoResize"></textarea>
+    <h4>VALOR: {{soli.valor | currency :'BRL':'R$'}} </h4>
+  </div>
+</html>

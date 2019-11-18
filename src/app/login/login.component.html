@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xml:lang="pt-BR">
+<p-panel>
+  <p-header style="align-content: center">
+    <div>
+      <h3 style="text-align: center">LOGIN </h3>
+    </div>
+  </p-header>
+  <form [formGroup]="meuForm" style="text-align:center" type="submit" method="post" action="/login">
+    <div class="row" style="text-align: center" class="form-group">
+
+      <span class="ui-inputgroup-addon"><i class="fa fa-envelope fa-2x"></i></span>
+      <input id="lo" class="form-control" formControlName="login" type="text" id="lo" placeholder="E-MAIL" pInputText
+        pTooltip="Entre com seu e-mail." required="true" onkeyup="this.value = this.value.toLowerCase();" />
+
+    </div>
+    <div class="row" style="text-align: center" class="form-group">
+
+      <span class="ui-inputgroup-addon"><i class="fa fa-key fa-2x"></i></span>
+      <input class="form-control" id="se" formControlName="senha" feedback=false placeholder="LOGIN" pInputText
+        pTooltip="Entre com sua senha." type="password" />
+
+    </div>
+  </form>
+  <p-footer style="text-align: center;">
+    <div>
+      <button pButton type="button" [disabled]="meuForm.invalid" (click)="loginBanco()" icon="fa fa-check-circle fa-1x"
+        label="Ok" class="ui-button-info" style="margin-right: .25em"></button>
+      <button pButton type="button" [disabled]=true icon="pi pi-pencil" label="Alterar" class="ui-button-success"></button>
+    </div>
+  </p-footer>
+
+</p-panel>
+<div>
+  Copyright @2018
+  <p-toast [style]="{marginTop: '80px'}" position="center" key="msg1"></p-toast>
+  <p-messages [(value)]="msgs"></p-messages>
+</div>
+
+<html>

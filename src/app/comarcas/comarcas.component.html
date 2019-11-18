@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <html>
+
+    <p-panel>
+      <p-header>
+        <div style='text-align: center'>
+       Comarcas
+        </div>
+      </p-header>
+      <p-toolbar >
+          <div class="ui-toolbar-group-left">
+            <button pButton type="button" label="Cadastrar" tooltipPosition="top" [routerLink]="['/comarcas/cadastro']" pTooltip="Cick aqui para cadastrar a comercar" icon="fa fa-search" class="ui-button-info"></button>
+          </div>
+          <div class="ui-toolbar-group-right">
+              <i class="fa fa-search fa-2x"    style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="32" placeholder="Filtro global" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <button icon="pi pi-sign-out" class="ui-button-info" tooltipPosition="top" pButton type="button" [routerLink]="['/menu']" pTooltip="Click aqui para voltar para voltar ao  menu"
+              label="Sair" class="ui-button-raised"></button>
+          </div>
+
+        </p-toolbar>
+
+
+      <p-table #dt [columns]="colunas" [value]="comarca" [paginator]="true" [rows]="20" [resizableColumns]="true"
+        [responsive]="true">
+
+
+        <ng-template pTemplate="header" let-colunas>
+          <tr>
+            <th *ngFor="let col of colunas" [pSortableColumn]="col.field" pResizableColumn><span class="ui-column-title">
+              {{col.header}}</span>
+              <p-sortIcon [field]="colunas.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-com>
+
+          <tr>
+            <td style="background-color: orange"pResizableColumn><span class="ui-column-title">ID</span> {{com.id}}</td>
+            <td pResizableColumn><span class="ui-column-title">NOME</span> {{com.nome}}</td>
+            <td pResizableColumn><span class="ui-column-title">ESTADO</span> {{com.estado }}</td>
+            <td pResizableColumn><span class="ui-column-title">OPÇÃO</span><button class="ui-button-raised" pButton pTooltip="Selecione para alterar" icon="fa fa-file-text-o fa-2x"
+              ></button></td>
+
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+ <!--
+    | json | slice: 42:-1
+    | json  | slice:42:-1
+ -->
+  </html>

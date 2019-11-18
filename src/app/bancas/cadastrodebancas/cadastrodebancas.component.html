@@ -1,0 +1,56 @@
+<html>
+<p-panel>
+  <p-header>
+    Cadastro de Bancas
+  </p-header>
+  <form [formGroup]="formpadrao" method="POST" (ngSubmit)="salvarBanca()">
+    <div class="ui-g">
+      <div class="ui-g-4">
+        Nome da Banca
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" onkeyup="this.value = this.value.toUpperCase();" formControlName="banca"
+          pInputText style="width: 100%" placeholder="Nome da banca" />
+      </div>
+      <div class="ui-g-4">
+        Email da Banca
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" onkeyup="this.value = this.value.toLowerCase();" formControlName="email"
+          pInputText style="width: 100%" placeholder="Email da banca" />
+      </div>
+      <div class="ui-g-4">
+        Email do Responsável.
+      </div>
+      <div class="ui-g-8">
+        <input pInputText type="text" onkeyup="this.value = this.value.toLowerCase();" formControlName="emailgestordabanca"
+          pInputText style="width: 100%" placeholder="Email responsável da banca" />
+      </div>
+
+
+
+    </div>
+    <p-toolbar>
+      <div class="ui-toolbar-group-left">
+        <button pButton type="button" label="Salvar" type="submit" [disabled]="formpadrao.invalid" tooltipPosition="top"
+          pTooltip="Cick aqui para cadastrar a bancas" icon="fa fa-search" class="ui-button-info"></button>
+      </div>
+      <div class="ui-toolbar-group-right">
+
+        <button icon="pi pi-sign-out" class="ui-button-info" tooltipPosition="top" pButton type="button" [routerLink]="['/bancas']"
+          pTooltip="Click aqui para voltar para voltar ao  menu" label="Sair" class="ui-button-raised"></button>
+      </div>
+
+    </p-toolbar>
+
+
+
+  </form>
+
+
+</p-panel>
+<div>
+  <p-messages [(value)]="msgs"></p-messages>
+</div>
+
+</html>

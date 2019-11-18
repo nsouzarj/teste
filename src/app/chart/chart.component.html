@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<p-panel>
+  <p-header>
+    Demostrativo Gráfico
+  </p-header>
+  <div>
+    <button icon="pi pi-sign-out" class="ui-button-info" pButton type="button" [routerLink]="['/menu']" pTooltip="Click aqui para voltar para voltar ao  menu" label="Sair" class="ui-button-raised"></button>
+  </div>
+  <p-chart type="bar" [responsive]="true" [data]="data"></p-chart>
+
+  <p-footer>
+    Ano: 2018
+  </p-footer>
+</p-panel>
+</html>

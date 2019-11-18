@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+  <p-panel [toggleable]="true" [transitionOptions]="'800ms'">
+
+    <p-header style="text-align: left">
+      <div>
+        Pesquisar Solicitações
+      </div>
+
+    </p-header>
+    <form [formGroup]="formpadrao" type="submit" action="/solicitacoes" method="get">
+      <div class="ui-g">
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Número
+          </div>
+          <div class="ui-g-8">
+            <input type="number" pInputText [(ngModel)]="idsolicitacao" name="numero" formControlName="numero"
+              pInputText size="20" placeholder="Numero Solicitação">
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Processo
+          </div>
+          <div class="ui-g-8">
+            <input type="text" formControlName="numprocesso" value="" pInputText size="20" placeholder="Numero Processo">
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Integração
+          </div>
+          <div class="ui-g-8">
+            <input type="text" formControlName="numerointegracao" pInputText size="20" placeholder="Numero Integração">
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Colaborador
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown responsive="true" type="text" (onChange)="setaColaborador()" [selectId]="0" [tabindex]="0"
+              formControlName="correspondente"  [filter]="false" filterBy="label,value.code" [style]="{'width':'100%'}"
+              [options]="todoscolaborador" placeholder="Selecione o Colaborador" optionLabel="nome" [(ngModel)]="colab"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Banca
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown [options]="bancas" (onChange)="setaBanca()" formControlName="bancabusca" baseZIndex="0" [style]="{'width':'100%'}"
+              placeholder="Selecione a banca" optionLabel="banca" [(ngModel)]="banca" ></p-dropdown>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Estado
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown id="dp" [options]="estados" formControlName="estado" (onChange)="buscaestados(estadoslista)"
+              [style]="{'width':'100%'}" placeholder="Selecione o estado da comarca" optionLabel="nome" [(ngModel)]="estadoslista"
+              ></p-dropdown>
+          </div>
+
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Comarcas
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown id="ca" [options]="comarcas" (onChange)="setaComarca()" baseZIndex="0" formControlName="comarca"
+              [style]="{'width':'100%'}" [filter]="false" filterBy="label,value.name" placeholder="Selecione a comarca"
+              optionLabel="nome" [(ngModel)]="comarcaslista" ></p-dropdown>
+          </div>
+        </div>
+
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Usuario
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown id="us" value="0" (onChange)="setaUsuario()" formControlName="idusuario" baseZIndex="0"
+              [options]="usuarios" [filter]="false" placeholder="Selecione um usuário" optionLabel="nomecompleto"
+              filterBy="label,value.name" [style]="{'width':'100%'}" [(ngModel)]="usuarioli" ></p-dropdown>
+          </div>
+
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Parte Contrária
+          </div>
+          <div class="ui-g-8">
+            <input type="text" formControlName="reunome" [(ngModel)]="reu" style="width: 100%" pInputText size="60"
+              placeholder="Parte contrária" onkeyup="this.value = this.value.toUpperCase();">
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Cliente
+          </div>
+          <div class="ui-g-8">
+            <input style="width: 100%" formControlName="autornome" [(ngModel)]="autor" type="text" pInputText size="60"
+              placeholder="Cliente" onkeyup="this.value = this.value.toUpperCase();">
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Status
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown id="st" [options]="status" value="0" (onChange)="setaStatus()" [selectId]="0" [tabindex]="0"
+              formControlName="status" [filter]="false" placeholder="Selecione um status" optionLabel="status" filterBy="label,value.name"
+              [style]="{'width':'100%'}" [(ngModel)]="listastatus" ></p-dropdown>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Juizado
+          </div>
+
+          <div class="ui-g-8">
+            <p-dropdown id="org" [options]="orgaos" [selectId]="0" [tabindex]="0" value="0" (onChange)="setaOrgao()"
+              formControlName="orgao" [filter]="false" placeholder="Selecione um juizado" optionLabel="descricao"
+              filterBy="label,value.name" [style]="{'width':'100%'}" [(ngModel)]="listaorgao" ></p-dropdown>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Tipo
+          </div>
+          <div>
+            <p-radioButton name="g1" formControlName="tiposolicitacao" value="A" [(ngModel)]="tiposolicitacao" label="Audiência "
+              inputId="1"></p-radioButton>
+            <p-radioButton name="g1" formControlName="tiposolicitacao" value="D" [(ngModel)]="tiposolicitacao" label="Diligência "
+              inputId="2"></p-radioButton>
+            <p-radioButton name="g1" formControlName="tiposolicitacao" value="T" [(ngModel)]="tiposolicitacao" label="Todas"
+              inputId="3"></p-radioButton>
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Forma da Data
+          </div>
+          <div class="ui-g-8">
+            <p-radioButton name="g2" value="1" [(ngModel)]="tipoperido" formControlName="tipoperido" label="Data de Elaboração "
+              inputId="1"></p-radioButton>
+            <p-radioButton name="g2" value="2" [(ngModel)]="tipoperido" formControlName="tipoperido" label="Data do Prazo "
+              inputId="2"></p-radioButton>
+
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Data Inicial.
+          </div>
+          <div class="ui-g-8">
+            <p-calendar [(ngModel)]="datbusca1" [locale]="en" [yearNavigator]="true" yearRange="2013:2020" dateFormat="dd/mm/yy"
+              [style]="{'width':'100%'}" formControlName="datainicial" [showIcon]="true"></p-calendar>
+          </div>
+        </div>
+        <div class="ui-md-6 ui-g-12">
+          <div class="ui-g-4">
+            Data Final.
+          </div>
+          <div class="ui-g-8">
+            <p-calendar [(ngModel)]="datbusca2" [locale]="en" [yearNavigator]="true" yearRange="2013:2020" dateFormat="dd/mm/yy"
+              [style]="{'width':'100%'}" formControlName="datafinal" [showIcon]="true"></p-calendar>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!--
+   Barar de feramentas
+  -->
+
+    <p-toolbar [style]="{'width':'100%'}">
+      <div class="ui-toolbar-group-left">
+        <button pButton type="submit" label="Buscar" (click)="busca()" tooltipPosition="top" pTooltip="Cick aqui praza fazer a busca"
+          icon="fa fa-search" class="ui-button-info" type="submit"></button>
+        <button pButton type="button" label="Limpar" tooltipPosition="top" (click)="reseta()" pTooltip="Cick aqui limpar a busca"
+          icon="fa fa-bell-slash" class="ui-button-success"></button>
+        <button pButton type="button" label="Nova" tooltipPosition="top" pTooltip="Cick elaborar uma nova soliictacao"
+          icon="fa fa-bell-slash" class="ui-button-info"></button>
+
+      </div>
+      <div class="ui-toolbar-group-right">
+        <button icon="pi pi-sign-out" class="ui-button-info" tooltipPosition="top" pButton type="button" [routerLink]="['/menu']"
+          pTooltip="Click aqui para voltar para voltar ao  menu" label="Sair" class="ui-button-raised"></button>
+      </div>
+    </p-toolbar>
+
+  </p-panel>
+  <!--
+    Aqui e a ela das soliciações trazidas
+  -->
+  <div>
+
+    <p-table #dt [columns]="colunas" [value]="solicitacao" [paginator]="true" [rows]="9" [resizableColumns]="true"
+      [responsive]="true">
+      <ng-template pTemplate="caption">
+        <div style="text-align: right">
+          <i class="fa fa-search fa-2x" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="32" placeholder="Filtro global" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            style="width:auto">
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header" let-colunas>
+        <tr>
+          <th *ngFor="let col of colunas" [pSortableColumn]="col.field" pResizableColumn><span class="ui-column-title">
+              {{col.header}}</span>
+            <p-sortIcon [field]="colunas.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+              ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-soli>
+        <tr>
+
+          <td style=" background-color: orange" pResizableColumn><span class="ui-column-title">ID</span>
+            {{soli.id}}</td>
+          <td pResizableColumn><span class="ui-column-title">Processo</span>{{soli.processo.numeroprocesso}}</td>
+          <td pResizableColumn><span class="ui-column-title">Réu</span>{{soli.processo.adverso}}</td>
+          <td pResizableColumn><span class="ui-column-title">Autor</span>{{soli.processo.parte}}</td>
+
+          <td pResizableColumn><span class="ui-column-title">Data Soli</span>{{soli.datasolictacao | date :'shortDate'}}
+          </td>
+          <td pResizableColumn><span class="ui-column-title">Tipo</span>{{soli.renumeracao.tiposolicitacao.tipo}}</td>
+          <td pResizableColumn><span class="ui-column-title">Usuário</span>{{soli.usuario.login}}</td>
+          <td pResizableColumn><span class="ui-column-title">Valor(R$)</span>{{soli.valor | currency :'BRL':'R$'}}</td>
+
+          <td pResizableColumn><span class="ui-column-title">SELECIONAR</span>
+            <button class="ui-button-raised" pButton pTooltip="Selecione a solicitação desejada" icon="fa fa-eye fa-2x"
+              (click)="show(soli)"></button>
+          </td>
+        </tr>
+
+      </ng-template>
+
+    </p-table>
+    <p-messages *ngIf="solicitacao === null" [(value)]="msgs"></p-messages>
+  </div>
+
+
+</html>

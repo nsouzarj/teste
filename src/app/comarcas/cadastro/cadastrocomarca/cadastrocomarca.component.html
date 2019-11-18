@@ -1,0 +1,44 @@
+<html>
+  <p-panel>
+    <p-header>
+      Cadastro de Comarca
+    </p-header>
+    <form [formGroup]="meuForm" (ngSubmit)="salvarcomar()">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Nome da comarca
+          </div>
+          <div class="ui-g-8">
+            <input type="text" id="nome" name="nome" required="true" formControlName="nome" pInputText style="width: 100%" placeholder="Nome da comarcas"
+              onkeyup="this.value = this.value.toUpperCase();">
+          </div>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+          <div class="ui-g-4">
+            Estado da Comarca
+          </div>
+          <div class="ui-g-8">
+            <p-dropdown id="uf_iduf" selectId="uf_iduf" name="uf" formControlName="uf" [disabled]="meuForm.invalid" required="true"
+              [options]="uf_iduf" [style]="{'width':'100%'}" placeholder="Selecione o estado da comarca" optionLabel="nome"
+              [(ngModel)]="estadoslista" [autoWidth]="false"></p-dropdown>
+          </div>
+        </div>
+
+      </div>
+      <p-toolbar>
+        <div class="ui-toolbar-group-rigth">
+          <button pButton type="button" label="Salvar" type="submit" [disabled]="meuForm.invalid" tooltipPosition="top"
+            pTooltip="Cick aqui para cadastrar a comarca" icon="fa fa-floppy-o" class="ui-button-success"></button>
+          <button pButton type="button" label="Sair" tooltipPosition="top" [routerLink]="['/comarcas']" pTooltip="Cick aqui para sair"
+            icon="pi pi-sign-out" class="ui-button-info"></button>
+        </div>
+      </p-toolbar>
+    </form>
+  </p-panel>
+  <div>
+    <p-messages [(value)]="msgs"></p-messages>
+  </div>
+
+</html>

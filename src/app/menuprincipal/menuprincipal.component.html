@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+    </style>
+  </head>
+  <div class="ui-g-12">
+    <p-panel>
+      <p-header style="text-align:center">
+        <div>
+        Seja bem vindo usuário:  {{  usuario  }}
+      </div>
+      </p-header>
+      <div>
+      <p-panelMenu [transitionOptions]="'700ms'" [model]="items" [style]="{'width':'300px'}" >
+        <button pButton label="Sair" icon="pi pi-sign-out" class="ui-button-info" pTooltip="Click aqui para sair da aplicação"
+          (onclick)="logout()" ></button>
+      </p-panelMenu>
+    </div>
+    <!--
+      <div>
+        <img style="max-width: 100;height: auto;" src="assets/imagens/logocra1.png">
+      </div>
+    -->
+    </p-panel>
+
+  </div>
+
+</html>
